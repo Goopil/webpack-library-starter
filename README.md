@@ -4,14 +4,15 @@ Webpack based boilerplate for producing libraries (Input: ES6, Output: universal
 
 this package is a fork from [https://github.com/krasimir/webpack-library-starter](https://github.com/krasimir/webpack-library-starter) a big thanks to him for laying the foundation.
 
+![Travis](https://travis-ci.org/Goopil/webpack-library-starter.svg?branch=master)
+
 ## change
+
 * implements eslint standard package 
 * implements babel-preset-env in place of babel-preset-2015.
 * add a banner based on the package.json config
 * change the lib output name based on the packages.json
 * remove source map for minified version
-
-![Travis](https://travis-ci.org/Goopil/webpack-library-starter.svg?branch=master)
 
 ## Features
 
@@ -92,3 +93,15 @@ In the following example we are excluding React and Lodash:
   }
 }
 ```
+
+## babel-preset-env config
+
+Don't forget to modify the browsers section of the `.babelrc` file to reflect your targeted browser support
+you can check your query [there](http://browserl.ist/)
+
+more reading [there](http://2ality.com/2017/02/babel-preset-env.html)
+
+To include polyfills in your lib you have to change the `useBuiltIns` options in the `.babelrc` file
+
+To have some insight on what is transformed, you can activate the `debug` in the `.babelrc` file
+
