@@ -11,7 +11,7 @@ this package is a fork from [https://github.com/krasimir/webpack-library-starter
 * change the lib output name based on the packages.json
 * remove source map for minified version
 
-![Travis](https://travis-ci.org/goopil/webpack-library-starter.svg?branch=master)
+![Travis](https://travis-ci.org/Goopil/webpack-library-starter.svg?branch=master)
 
 ## Features
 
