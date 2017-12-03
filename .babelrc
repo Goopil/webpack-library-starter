@@ -1,8 +1,9 @@
 {
   "presets": [
     ["env", {
-      "useBuiltIns": true,
-      "debug": true,
+      "useBuiltIns": false,
+      "debug": false,
+      "loose": true,
       "targets": {
         "browsers": [
           "last 2 versions"
