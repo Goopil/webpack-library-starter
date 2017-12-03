@@ -1,26 +1,30 @@
-/* global __dirname, require, module*/
+/* global __dirname, require, module */
 
-const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const path = require('path');
-const env = require('yargs').argv.env; // use --env with webpack 2
+const webpack = require('webpack')
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+const {resolve} = require('path')
+const env = require('yargs').argv.env // use --env with webpack 2
+const pkg = require('./package.json')
+const banner = `${pkg.name} ${pkg.version} - ${pkg.description}\nCopyright (c) ${ new Date().getFullYear() } ${pkg.author} - ${pkg.homepage}\nLicense: ${pkg.license}`
+const libraryName = pkg.name
 
-let libraryName = 'library';
-
-let plugins = [], outputFile;
+let outputFile
+let plugins = [
+  new webpack.BannerPlugin(banner)
+]
 
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + '.min.js';
+  plugins.push(new UglifyJsPlugin({minimize: true}))
+  outputFile = libraryName + '.min.js'
 } else {
-  outputFile = libraryName + '.js';
+  outputFile = libraryName + '.js'
 }
 
-const config = {
-  entry: __dirname + '/src/index.js',
+module.exports = {
+  entry: resolve('src/index.js'),
   devtool: 'source-map',
   output: {
-    path: __dirname + '/lib',
+    path: resolve('lib'),
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
@@ -41,10 +45,11 @@ const config = {
     ]
   },
   resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    modules: [
+      resolve('./node_modules'),
+      resolve('./src')
+    ],
     extensions: ['.json', '.js']
   },
   plugins: plugins
-};
-
-module.exports = config;
+}
