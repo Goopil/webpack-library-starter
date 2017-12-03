@@ -2,7 +2,16 @@
 
 Webpack based boilerplate for producing libraries (Input: ES6, Output: universal library)
 
-![Travis](https://travis-ci.org/krasimir/webpack-library-starter.svg?branch=master)
+this package is a fork from [https://github.com/krasimir/webpack-library-starter](https://github.com/krasimir/webpack-library-starter) a big thanks to him for laying the foundation.
+
+## change
+* implements eslint standard package 
+* implements babel-preset-env in place of babel-preset-2015.
+* add a banner based on the package.json config
+* change the lib output name based on the packages.json
+* remove source map for minified version
+
+![Travis](https://travis-ci.org/goopil/webpack-library-starter.svg?branch=master)
 
 ## Features
 
