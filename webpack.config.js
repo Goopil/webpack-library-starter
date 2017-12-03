@@ -8,10 +8,16 @@ const pkg = require('./package.json')
 const banner = `${pkg.name} ${pkg.version} - ${pkg.description}\nCopyright (c) ${ new Date().getFullYear() } ${pkg.author} - ${pkg.homepage}\nLicense: ${pkg.license}`
 const libraryName = pkg.name
 
-let outputFile
+let outputFile, sourcemap
 let plugins = [
   new webpack.BannerPlugin(banner)
 ]
+
+if (env === 'dev') {
+  sourcemap = 'source-map'
+} else {
+  sourcemap = 'nosources-source-map'
+}
 
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({minimize: true}))
@@ -22,7 +28,7 @@ if (env === 'build') {
 
 module.exports = {
   entry: resolve('src/index.js'),
-  devtool: 'source-map',
+  devtool: sourcemap,
   output: {
     path: resolve('lib'),
     filename: outputFile,
