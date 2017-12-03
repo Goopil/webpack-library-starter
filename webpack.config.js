@@ -3,32 +3,29 @@
 const webpack = require('webpack')
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const {resolve} = require('path')
-const env = require('yargs').argv.env // use --env with webpack 2
+const env = require('yargs').argv.env
 const pkg = require('./package.json')
 const banner = `${pkg.name} ${pkg.version} - ${pkg.description}\nCopyright (c) ${ new Date().getFullYear() } ${pkg.author} - ${pkg.homepage}\nLicense: ${pkg.license}`
 const libraryName = pkg.name
-
-let outputFile, sourcemap
-let plugins = [
+const plugins = [
   new webpack.BannerPlugin(banner)
 ]
 
-if (env === 'dev') {
-  sourcemap = 'source-map'
-} else {
-  sourcemap = 'nosources-source-map'
-}
+let outputFile, sourceMap
 
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({minimize: true}))
+
   outputFile = libraryName + '.min.js'
+  sourceMap = 'nosources-source-map'
 } else {
   outputFile = libraryName + '.js'
+  sourceMap = 'source-map'
 }
 
 module.exports = {
   entry: resolve('src/index.js'),
-  devtool: sourcemap,
+  devtool: sourceMap,
   output: {
     path: resolve('lib'),
     filename: outputFile,
@@ -46,13 +43,14 @@ module.exports = {
       {
         test: /(\.jsx|\.js)$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: /(node_modules|bower_components)/
       }
     ]
   },
   resolve: {
     modules: [
       resolve('./node_modules'),
+      resolve('./bower_components'),
       resolve('./src')
     ],
     extensions: ['.json', '.js']
