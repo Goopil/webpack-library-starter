@@ -1,7 +1,8 @@
 /* global describe, it, before */
 import chai from 'chai'
-import {name} from '../package.json'
-const {Cat, Dog } = require(`../lib/${name}.js`)
+import { name } from '../package.json'
+
+const {Cat, Dog} = require(`../lib/${name}.js`)
 
 chai.expect()
 
