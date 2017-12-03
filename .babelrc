@@ -1,6 +1,8 @@
 {
   "presets": [
     ["env", {
+      "useBuiltIns": true,
+      "debug": true,
       "targets": {
         "browsers": [
           "last 2 versions"
@@ -8,5 +10,7 @@
       }
     }]
   ],
-  "plugins": ["babel-plugin-add-module-exports"]
+  "plugins": [
+    "babel-plugin-add-module-exports"
+  ]
 }
